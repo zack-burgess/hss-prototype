@@ -462,7 +462,7 @@
         <button type="button" data-role="manager" aria-pressed="true">CSP Manager</button>
         <button type="button" data-role="tech" aria-pressed="false">CSP Technician</button>
       </div>
-      <span class="now">Tue Nov 17 · 14:30</span>
+      <span class="now">Tue Nov 17 · 15:00</span>
     </div>
 
     <!-- ================= CSP MANAGER ================= -->
@@ -699,7 +699,7 @@
   var DAY_START = 7 * 60 + 30, TURNOVER = 30;
   // Pinned cases tie the list to the trays on screen. Key: "week-day" → OR → { surgeon, slot: case }.
   var PINS = {
-    "1-1": { 4: { surgeon: "Alvarez", slot: 2, proc: "tkr", start: 13 * 60 } },               // in progress at 14:30: Knee Tray – Dr. Alvarez is "In Use"
+    "1-1": { 4: { surgeon: "Alvarez", slot: 2, proc: "tkr", start: 13 * 60 + 30 } },          // in progress at 15:00: Knee Tray – Dr. Alvarez is "In Use"
     "1-2": {
       4:  { surgeon: "Alvarez", slot: 0, proc: "tkr", start: 7 * 60 + 30 },                    // tomorrow 07:30
       7:  { surgeon: "Reyes", slot: 0, proc: "ankle", start: 7 * 60 + 30, swap: ["Basic Instrument Tray", "Ortho Tray"] },
@@ -762,8 +762,8 @@
     surgeryCache[key] = list;
     return list;
   }
-  // status at the demo's "now" (Tue 14:30); past days complete, future days scheduled
-  var NOW_MIN = 14 * 60 + 30;
+  // status at the demo's "now" (Tue 15:00); past days complete, future days scheduled
+  var NOW_MIN = 15 * 60;
   function statusOf(day, c) {
     if (day.past) return "complete";
     if (!day.today) return "scheduled";
@@ -1122,7 +1122,7 @@
     ].map(function (l) { return "<li" + (l[1] ? ' class="result"' : "") + ">" + l[0] + "</li>"; }).join("") + "</ul>";
     // below the line: Epic's data, source named once
     var source = '<h3 class="label source' + (single ? "" : " grouped") + '">' + day.surg + ' surgeries<span class="source-sep">·</span>' + EPIC_LOGO +
-      '<span class="synced">synced 14:28</span><span class="col-trays">' + totalTrays(day) + " trays</span></h3>";
+      '<span class="synced">synced 14:58</span><span class="col-trays">' + totalTrays(day) + " trays</span></h3>";
     var body = single
       ? '<div class="srows">' + surgeryRows(groups[0].cases, "s-") + "</div>"
       : groups.map(function (g) {
@@ -1262,9 +1262,9 @@
     });
   }
 
-  // ---------- countdowns: "Tomorrow · 07:30 (17 hours away)" ----------
-  // Demo "now" is Tue Nov 17, 14:30. Rounded down: never show more time than there is.
-  var NOW = new Date(2026, 10, 17, 14, 30);
+  // ---------- countdowns: "Tomorrow · 07:30 (16 hours away)" ----------
+  // Demo "now" is Tue Nov 17, 15:00. Rounded down: never show more time than there is.
+  var NOW = new Date(2026, 10, 17, 15, 0);
   var MONTHS = { Nov: 10, Dec: 11 };
   function parseWhen(text) {
     var m = text.match(/^(Today|Tomorrow|\w{3} (\w{3}) (\d{1,2})) · (\d{2}):(\d{2})$/);
