@@ -836,7 +836,7 @@
       '<span class="row-status">' + e.status + '</span><span class="row-meta">' + e.whenText + "</span>" +
       '<span class="tag-cell"><span class="tag ' + e.type + '">' + icon(e.type) + e.type + "</span></span></button>" +
       '<div class="tray-body neutral" id="' + id + '-body" hidden><dl class="facts">' +
-      "<dt>Status</dt><dd>" + e.status + "</dd><dt>Next surgery</dt><dd>" + e.next + "</dd></dl>" +
+      "<dt>Status</dt><dd>" + e.status + "</dd><dt>" + (e.whenLabel || "Next surgery") + "</dt><dd>" + e.next + "</dd></dl>" +
       (e.instruments ? '<p class="sublabel">' + icon("instruments") + 'Instruments</p><ul class="instruments">' +
         e.instruments.map(function (x) { return "<li>" + x + "</li>"; }).join("") + "</ul>" : "") + "</div>";
   }
@@ -905,7 +905,7 @@
         var hand = HANDMADE_NEEDED[c.or + "|" + t];
         needed.push({ name: t, type: trayType(t), or: c.or, when: c.start,
           status: hand ? hand[0] : STATUS_ORDER[(k++ * 7 + c.or) % STATUS_ORDER.length],
-          whenText: "OR " + c.or + " · " + hhmm(c.start), next: "Tomorrow · " + hhmm(c.start), instruments: hand && hand[1] });
+          whenText: "OR " + c.or + " · " + hhmm(c.start), next: "Tomorrow · " + hhmm(c.start), whenLabel: "Surgery", instruments: hand && hand[1] });
       });
     });
   })();
